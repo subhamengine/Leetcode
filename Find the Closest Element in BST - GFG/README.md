@@ -1,5 +1,5 @@
 # Find the Closest Element in BST
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a <strong><a href="http://quiz.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/" target="_blank">BST</a></strong>&nbsp;and an integer. Find the least absolute difference between any node value of the BST and the given integer.</span></p>
 

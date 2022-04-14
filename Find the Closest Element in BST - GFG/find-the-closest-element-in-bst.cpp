@@ -27,9 +27,16 @@ class Solution
 	//value of the BST and the given integer.
 	void solve(Node* root, int k ,int &ans){
 	    if(!root)return;
+	    if(k == root->data){
+	        ans = 0;
+	        return;
+	    }
 	    ans = min(ans,abs(root->data - k));
-	    solve(root->left,k,ans);
-	    solve(root->right,k,ans);
+	    if(k<root->data){
+	        return solve(root->left,k,ans);
+	    }else{
+	        return solve(root->right,k,ans);
+	    }
 	}
     int minDiff(Node *root, int k)
     {

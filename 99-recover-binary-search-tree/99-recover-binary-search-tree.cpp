@@ -11,25 +11,23 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* root, vector<int>&v){
+    void solve(TreeNode* root, TreeNode* &prev, TreeNode* &first , TreeNode* &last){
         if(!root)return;
-        solve(root->left,v);
-        v.push_back(root->val);
-        solve(root->right,v);
-    }
-    int i = 0;
-    void solve2(TreeNode* root,vector<int>v){
-        if(!root)return;
-        solve2(root->left,v);
-        root->val = v[i];
-        i++;
-        solve2(root->right,v);
+        solve(root->left,prev,first,last);
+        if(prev){
+            if(prev->val > root->val){
+                if(!first){
+                    first = prev;
+                }
+                last = root;
+            }
+        }
+        prev = root;
+        solve(root->right,prev,first,last);
     }
     void recoverTree(TreeNode* root) {
-        vector<int>v;
-        solve(root,v);
-        sort(v.begin(),v.end());
-        solve2(root,v);
-       
+        TreeNode* prev = NULL, *first = NULL, *last = NULL;
+        solve(root,prev,first,last);
+        swap(first->val,last->val);
     }
 };

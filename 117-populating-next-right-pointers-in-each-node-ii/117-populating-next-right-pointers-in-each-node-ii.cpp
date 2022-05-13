@@ -19,24 +19,28 @@ public:
 class Solution {
 public:
     
-    void help(Node* root, int level , unordered_map<int,vector<Node*>>&mp){
-        if(root == NULL) return;
-        help(root->left,level+1,mp);
-        mp[level].push_back(root);
-        help(root->right,level+1,mp);
+    Node* help(Node* root){
+        if(root == NULL) return NULL;
+        if(root->left) return root->left;
+        if(root->right) return root->right;
+        return help(root->next);
     }
     Node* connect(Node* root) {
-        int level = 0;
-        unordered_map<int,vector<Node*>>mp;
-        help(root,level,mp);
-        for(auto it:mp){
-            vector<Node*>&v = it.second;
-            for(int i = 0 ; i < v.size()-1 ; i++){
-                v[i]->next = v[i+1];
+       if(!root) return NULL;
+        if(root->left){
+            if(root->right){
+                root->left->next = root->right;
             }
-            v[v.size()-1]->next = NULL;
+            else{
+                root->left->next = help(root->next);
+            }
+        }
+        if(root->right){
+            root->right->next = help(root->next);
         }
         
+        connect(root->right);
+        connect(root->left);
         return root;
     }
 };

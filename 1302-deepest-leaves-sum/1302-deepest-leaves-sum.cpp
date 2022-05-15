@@ -11,28 +11,23 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* root, int level ,  map<int,vector<int>,greater<int>>&mp){
+    void solve(TreeNode* root, int curLevl , int &level){
+        if(!root) return;
+        solve(root->left,curLevl+1,level);
+        if(curLevl > level)level = curLevl;
+        solve(root->right,curLevl+1,level);
+    }
+    void sumUp(TreeNode* root, int &sum, int curLevel , int &level){
         if(!root)return;
-        solve(root->left,level+1,mp);
-        if(mp.size() and level > mp.begin()->first)mp.erase(mp.begin());
-        mp[level].push_back(root->val);
-        solve(root->right,level+1,mp);
+        sumUp(root->left,sum,curLevel+1,level);
+        if(level == curLevel)sum+=root->val;
+        sumUp(root->right,sum,curLevel+1,level);
     }
     int deepestLeavesSum(TreeNode* root) {
-        map<int,vector<int>,greater<int>>mp;
         int level = 0;
-        solve(root,level,mp);
-        int ans = 0;
-        for(auto it:mp){
-            
-            for(auto gt:it.second){
-                ans+=gt;
-                
-            }
-            
-            break;
-            
-        }
-        return ans;
+        solve(root,0,level);
+        int sum = 0;
+        sumUp(root,sum,0,level);
+        return sum;
     }
 };

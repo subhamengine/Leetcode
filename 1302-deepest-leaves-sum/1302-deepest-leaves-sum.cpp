@@ -27,7 +27,9 @@ public:
             
             for(auto gt:it.second){
                 ans+=gt;
+                
             }
+            
             break;
             
         }

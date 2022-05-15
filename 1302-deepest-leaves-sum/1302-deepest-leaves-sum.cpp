@@ -14,6 +14,7 @@ public:
     void solve(TreeNode* root, int level ,  map<int,vector<int>,greater<int>>&mp){
         if(!root)return;
         solve(root->left,level+1,mp);
+        if(mp.size() and level > mp.begin()->first)mp.erase(mp.begin());
         mp[level].push_back(root->val);
         solve(root->right,level+1,mp);
     }

@@ -9,15 +9,20 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        set<ListNode*>st;
-        while(headA){
-            st.insert(headA);
-            headA = headA->next;
+        ListNode* slow = headA;
+        ListNode* fast = headB;
+        
+        
+        if(!slow or !fast) return NULL;
+        while(slow and fast and slow != fast){
+            
+            slow = slow->next;
+            fast = fast->next;
+            if(slow == fast) return slow;
+            
+            if(!slow) slow = headA;
+            if(!fast) fast = headB;
         }
-        while(headB){
-            if(st.find(headB)!=st.end()) return headB;
-            headB = headB->next;
-        }
-        return NULL;
+        return slow;
     }
 };

@@ -11,7 +11,7 @@ public:
             int x = -1;
             for(auto ch : word){
                 auto it = upper_bound(store[ch-'a'].begin(),store[ch-'a'].end(),x);
-                if(it == store[ch-'a'].end()) found = false;
+                if(it == store[ch-'a'].end()){ found = false; break;}
                 else x = *it;
                 
             }

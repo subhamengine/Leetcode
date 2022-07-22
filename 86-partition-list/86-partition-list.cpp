@@ -17,16 +17,18 @@ public:
         ListNode* dummy2 = right;
         
         while(head){
-            ListNode* upcoming = new ListNode(head->val);
+            
             if(head->val < x){
-                dummy1->next = upcoming;
+                dummy1->next = head;
                 dummy1 = dummy1->next;
             }
             else{
-                dummy2->next = upcoming;
+                dummy2->next = head;
                 dummy2 = dummy2->next;
             }
-            head = head->next;
+            ListNode* temp = head->next;
+            head->next = NULL;
+            head = temp;
         }
         dummy1->next = right->next;
         return left->next;

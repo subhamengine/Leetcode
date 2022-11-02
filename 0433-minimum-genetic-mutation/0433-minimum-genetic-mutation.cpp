@@ -3,11 +3,9 @@ public:
     
     
     int minMutation(string start, string end, vector<string>& bank) {
-        vector<int>diff;
+        
         vector<char>col = {'A','C','G','T'};
-        for(int i = 0 ; i < start.size() ; i++){
-            if(start[i] != end[i])diff.push_back(i);
-        }
+        
         set<string>st;
         for(auto it:bank){
             st.insert(it);

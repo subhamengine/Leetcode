@@ -9,6 +9,6 @@ public:
             }
         }
         
-        return num = stoi(s);
+        return stoi(s);
     }
 };

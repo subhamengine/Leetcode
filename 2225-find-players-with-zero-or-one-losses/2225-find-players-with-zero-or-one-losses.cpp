@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> findWinners(vector<vector<int>>& matches) {
-        map<int,pair<int,int>>mp;
+        unordered_map<int,pair<int,int>>mp;
         for(auto it:matches){
             mp[it[0]].first +=1;
             mp[it[1]].second += 1;
@@ -19,6 +19,8 @@ public:
                 two.push_back(it.first);
             }
         }
+        sort(one.begin(),one.end());
+        sort(two.begin(),two.end());
         ans.push_back(one);
         ans.push_back(two);
         return ans;
